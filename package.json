@@ -6,5 +6,8 @@
   "repository": "https://github.com/maiermic/12-factor-app-example-backend-nodejs.git",
   "author": "\"Michael Maier\" <maier1michael@gmail.com>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "mongodb": "^3.0.2"
+  }
 }
