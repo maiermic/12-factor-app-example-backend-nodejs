@@ -2,7 +2,7 @@ const secrets = require('docker-secrets');
 const mongoose = require('mongoose');
 
 console.log(`connect to database ${process.env.MONGO_URI}`);
-console.log('secrets', JSON.stringify(secrets, null, 4))
+console.log('secrets', JSON.stringify(secrets, null, 4));
 mongoose.connect(
     process.env.MONGO_URI,
     {
