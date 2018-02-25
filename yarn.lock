@@ -6,6 +6,10 @@ bson@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/bson/-/bson-1.0.4.tgz#93c10d39eaa5b58415cbc4052f3e53e562b0b72c"
 
+docker-secrets@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/docker-secrets/-/docker-secrets-1.0.2.tgz#bfe0d4b331c33c5a985b245d604df2c3f061e958"
+
 mongodb-core@3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/mongodb-core/-/mongodb-core-3.0.2.tgz#914896092dd45427d9a4f98a7997a0bfb81d163b"
