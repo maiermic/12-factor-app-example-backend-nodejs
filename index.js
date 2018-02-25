@@ -16,9 +16,14 @@ mongoose.connect(
     function onConnectionSuccess() {
         console.log('Connected to MongoDB!');
         console.log(`database name ${mongoose.connection.db.databaseName}`);
-        console.log('Close database connection');
-        mongoose.connection.close();
-        process.exit();
+        const express = require('express');
+        const app = express();
+        app.get('/', (req, res) => {
+            res.send('hello world');
+        });
+        app.listen(process.env.PORT, () => {
+            console.log(`Server listening on port ${process.env.PORT}!`);
+        });
     },
     function onConnectionFailure(err) {
         console.log('Cannot connect to MongoDB!', err);
