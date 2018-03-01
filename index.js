@@ -46,16 +46,14 @@ mongoose.connect(
                 res.sendStatus(500);
             }
         });
-        app.get('/images/', jsonParser, (req, res) => {
-            ImageModel.find().exec().then(
-                function (images) {
-                    res.json(images.map(({title, url}) => ({title, url})));
-                },
-                function (err) {
-                    console.log('Could not get images', err);
-                    res.sendStatus(500);
-                }
-            )
+        app.get('/images/', jsonParser, async (req, res) => {
+            try {
+                const images = await ImageModel.find().exec();
+                res.json(images.map(({title, url}) => ({title, url})));
+            } catch (err) {
+                console.log('Could not get images', err);
+                res.sendStatus(500);
+            }
         });
         app.listen(process.env.PORT, () => {
             console.log(`Server listening on port ${process.env.PORT}!`);
