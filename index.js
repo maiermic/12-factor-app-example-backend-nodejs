@@ -49,7 +49,7 @@ mongoose.connect(
         app.get('/images/', jsonParser, async (req, res) => {
             try {
                 const images = await ImageModel.find().exec();
-                res.json(images.map(({title, url}) => ({title, url})));
+                res.json(images.map(({_id, title, url}) => ({id: _id, title, url})));
             } catch (err) {
                 console.log('Could not get images', err);
                 res.sendStatus(500);
