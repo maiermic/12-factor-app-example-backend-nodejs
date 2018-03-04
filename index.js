@@ -17,14 +17,14 @@ async function main() {
         });
         console.log('Connected to MongoDB!');
         console.log(`database name ${mongoose.connection.db.databaseName}`);
-        startServer();
+        await startServer();
     } catch (err) {
         console.log('Cannot connect to MongoDB!', err);
         process.exit();
     }
 }
 
-function startServer() {
+async function startServer() {
     const Image = new mongoose.Schema({
         title: String,
         urlPath: String,
@@ -43,8 +43,20 @@ function startServer() {
     app.post('/images/', jsonParser, addImage);
     app.get('/images/', jsonParser, getImages);
     app.put('/images/:id/upload', fileUpload(), uploadImage);
-    app.listen(process.env.PORT, () => {
-        console.log(`Server listening on port ${process.env.PORT}!`);
+    const server = await app.listen(process.env.PORT);
+    console.log(`Server listening on port ${process.env.PORT}!`);
+    // https://joseoncode.com/2014/07/21/graceful-shutdown-in-node-dot-js/
+    process.on('SIGTERM', async function shutdownGracefully() {
+        try {
+            console.log('shutdown server gracefully');
+            await server.close();
+            console.log('disconnect from database');
+            await mongoose.disconnect();
+            console.log('graceful shutdown done');
+        } catch (err) {
+            console.error('Unexpected error during graceful shutdown', err);
+        }
+        process.exit(0);
     });
 
     async function addImage(req, res) {
