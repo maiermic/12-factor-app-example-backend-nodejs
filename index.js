@@ -82,11 +82,14 @@ async function startServer() {
     async function getImages(req, res) {
         try {
             const images = await ImageModel.find().exec();
-            res.json(images.map(({_id, title, url}) => ({
-                id: _id,
-                title,
-                url
-            })));
+            res.json(
+                images.filter(image => Boolean(image.urlPath))
+                    .map(({_id, title, urlPath}) => ({
+                        id: _id,
+                        title,
+                        url: url.resolve(process.env.BASE_IMAGE_URL, urlPath),
+                    }))
+            );
         } catch (err) {
             console.log('Could not get images', err);
             res.sendStatus(500);
