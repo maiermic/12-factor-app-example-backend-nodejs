@@ -60,7 +60,6 @@ async function startServer() {
     });
 
     async function addImage(req, res) {
-        console.log('req.body', req.body);
         if (!req.body || !req.body.title) {
             return res.sendStatus(400);
         }
