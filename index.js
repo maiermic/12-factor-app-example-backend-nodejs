@@ -36,9 +36,11 @@ async function startServer() {
     const request = require('request');
     const tempfile = require('tempfile');
     const express = require('express');
+    const cors = require('cors');
     const bodyParser = require('body-parser');
     const fileUpload = require('express-fileupload');
     const app = express();
+    app.use(cors());
     const jsonParser = bodyParser.json();
     app.post('/images/', jsonParser, addImage);
     app.get('/images/', jsonParser, getImages);
