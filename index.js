@@ -33,7 +33,7 @@ async function startServer() {
     const fs = require('fs');
     const url = require('url');
     const path = require('path');
-    const request = require('request');
+    const request = require('request-promise-native');
     const tempfile = require('tempfile');
     const express = require('express');
     const cors = require('cors');
